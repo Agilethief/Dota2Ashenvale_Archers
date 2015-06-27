@@ -1,0 +1,491 @@
+
+// Dota Heroes File
+"DOTAAbilities"
+{
+	"Version"		"1"
+	
+		
+	//=================================================================================================================
+	// EmptyAbility
+	//=================================================================================================================
+	"ability_empty"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_Target"
+		"AbilityTextureName"		"axe_culling_blade"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
+		
+		 // Casting
+		 //-------------------------------------------------------------------------------------------------------------
+		 "AbilityCastPoint"				""
+		 "AbilityCastRange"				""
+		 "AbilityManaCost"				""
+		 "AbilityCooldown"				""
+		 "AbilityDamage"				""
+		 
+	}
+	
+	//=================================================================================================================
+	// Archer Arrow
+	//=================================================================================================================
+	"archer_arrow"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityTextureName"			"mirana_arrow"
+		"BaseClass"						"ability_datadriven"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		
+		//"OverrideAnimation"		"ACT_DOTA_ATTACK"
+		
+		
+		"precache"
+		{								 
+			"particle_folder"			"particles\units\heroes\hero_mirana"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_mirana.vsndevts"
+		}
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"3000"
+		"AbilityCastPoint"				"0.55 0.44 0.33 0.22"
+		"AnimationPlaybackRate"			"2"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"1"
+		
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"5 5 5 10"
+		
+		"AbilityDamage"				"500 600 700 1000"
+		
+		"OnSpellStart"
+		{
+			"LinearProjectile"
+			{							 
+				"EffectName"			"particles\units\heroes\hero_mirana\mirana_spell_arrow.vpcf"
+				"MoveSpeed"				"%speed"
+				"StartPosition"			"attach_attack1"
+				"StartRadius"			"%arrow_width"
+				"EndRadius"				"%arrow_width"
+				"FixedDistance"			"%arrow_range"
+				"TargetTeams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone"		"0"
+				"ProvidesVision"		"1"
+				"VisionRadius"			"300"
+			}
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Attack"
+			}
+		}
+		
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit"				"1"
+			
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Impact"
+				"Target"				"TARGET"
+			}
+			
+			"Damage"
+			{
+						"Target"				"TARGET"
+						"Type"					"DAMAGE_TYPE_PHYSICAL"
+						"Damage"				"%AbilityDamage"
+			}
+
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"speed"				"900.0"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_width"		"100"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_range"		"3000"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"spell_cooldown"			"1.5"
+			}
+		}
+	}
+	
+	"archer_birdseye"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_Target"
+		"AbilityTextureName"			"beastmaster_call_of_the_wild_hawk"
+		"AbilityCastAnimation"			"ACT_DOTA_TELEPORT"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.1"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"20 10 5 5"
+		
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"100 50 25 25"
+		
+		"OnSpellStart"
+		 {
+			"SpawnUnit"
+			{
+				"UnitName"		"npc_dota_bird"
+				"UnitCount" 	"1"
+				"SpawnRadius" 	"0"
+				"Target" 		"POINT"
+				"Duration"		"%duration"
+				"OnSpawn"
+				{
+
+				}
+				
+			}
+		 
+		 
+		}
+		
+		"Modifiers"
+		{
+		
+		}
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"sight"				"50 100 150 200"
+			}
+				"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"20 40 60 80"
+			}
+		}
+	}
+	
+	
+	//=================================================================================================================
+	// Archer recall
+	//=================================================================================================================
+	"archer_recall"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityTextureName"			"antimage_blink"
+		//"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO"
+		
+		 // Casting
+		 //-------------------------------------------------------------------------------------------------------------
+		 "AbilityCastPoint"				"0"
+		 "AbilityCastRange"				"0"
+		 "AbilityManaCost"				"25"
+		 "AbilityCooldown"				"5"
+		 "AbilityDamage"				"5000"
+		 
+		 "OnSpellStart"
+		 {
+			"Blink" 
+			{
+				"Target"	"SPAWN"
+			}
+		 } 
+	}
+	
+	"archer_dive"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityTextureName"			"windrunner_windrun"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.25"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"20 10 5 5"
+		
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"100 50 25 25"
+		
+		"OnSpellStart" 
+		{
+			"Knockback"
+			{
+				"Target"	"CASTER"
+				"Center"	"POINT"
+				"Duration"	"0.3"
+				"Distance"	"-300"
+				"Height"	"10"
+			}
+			"ApplyModifier"
+			{
+				"ModifierName"	"fatigued"
+				"Target"	"CASTER"
+			}
+		
+		}
+		
+		"Modifiers"
+		{
+			"fatigued"
+			{
+				"Duration"	"%duration"
+			 "Properties"
+				{
+				  "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%slow"
+				   "MODIFIER_PROPERTY_TURN_RATE_PERCENTAGE" "-100"
+
+				}
+			
+			}
+		}
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"3.0"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"slow"			"-60"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Archer Melee
+	//=================================================================================================================
+	"archer_melee"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		
+		"AbilityTextureName"			"bounty_hunter_jinada"
+		
+		 // Casting
+		 //-------------------------------------------------------------------------------------------------------------
+		 "AbilityCastPoint"				"0.25"
+		 "AbilityCastRange"				"150"
+		 "AbilityManaCost"				"0"
+		 "AbilityCooldown"				"2"
+		 "AbilityDamage"				"50"
+		 
+		 "OnSpellStart"
+		 {
+			"Damage" 
+			{
+				"Target"	"TARGET"
+				"Damage"	"%AbilityDamage"
+				"Type"		"DAMAGE_TYPE_MAGICAL"
+			}
+			
+			"Knockback"
+			{
+				"Target"				"TARGET"
+				"Center"	"CASTER"
+				"Duration"	"0.085"
+				"Distance"	"40"
+				"Height"	"10"
+			}
+			
+		 } 
+	}
+	
+		//=================================================================================================================
+	// NoMove
+	//=================================================================================================================
+	"ability_nomove"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"		"axe_culling_blade"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		
+		 // Casting
+		 //-------------------------------------------------------------------------------------------------------------
+		 "AbilityCastPoint"				""
+		 "AbilityCastRange"				""
+		 "AbilityManaCost"				""
+		 "AbilityCooldown"				""
+		 "AbilityDamage"				""
+	
+		"ApplyModifier"
+		{
+			"Target"	"CASTER"
+			"ModifierName"	"modifier_nomove"
+		}
+		
+		"Modifiers"
+		{
+			"modifier_nomove"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "-100"
+				}
+				"States"
+				{
+					"MODIFIER_STATE_UNSELECTABLE"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// InstaKill via script
+	//=================================================================================================================
+	"ability_instakill"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityTextureName"		"axe_culling_blade"
+		"AbilityCastAnimation"			"ACT_DOTA_TELEPORT"
+		
+		 // Casting
+		 //-------------------------------------------------------------------------------------------------------------
+		 "AbilityCastPoint"				""
+		 "AbilityCastRange"				""
+		 "AbilityManaCost"				"0"
+		 "AbilityCooldown"				""
+		 "AbilityDamage"				""
+		 "AbilityChannelTime"			"5.0"
+		 
+		 "OnChannelSucceeded"
+		{
+		 	"RunScript"
+			{
+				"Target"				"CASTER"
+				"ScriptFile"			"scripts/vscripts/instantkillscript.lua"
+				"Function"				"kill"
+			}
+		 }
+	}
+	
+	//=================================================================================================================
+	// TreeTag FellTree
+	//=================================================================================================================
+	"TreeTag_FellTree"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_Target"
+		"AbilityTextureName"		"axe_culling_blade"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
+		
+		 // Casting
+		 //-------------------------------------------------------------------------------------------------------------
+		 "AbilityCastPoint"				"0.2"
+		 "AbilityCastRange"				"200"
+		 "AbilityManaCost"				"10"
+		 "AbilityCooldown"				"1"
+		 "AbilityDamage"				"5000"
+		 
+		 "OnSpellStart"
+		 {
+			"DestroyTrees"
+				{
+					"Target"			"POINT"
+					"Radius"			"100"
+				}
+		 }
+		 
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			
+		}
+	}
+	
+	//=================================================================================================================
+	// Credits
+	//=================================================================================================================
+	"archer_credits"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityTextureName"			"luna_eclipse"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
+		
+		 // Casting
+		 //-------------------------------------------------------------------------------------------------------------
+		 "AbilityCastPoint"				"0"
+		 "AbilityCastRange"				"0"
+		 "AbilityManaCost"				"0"
+		 "AbilityCooldown"				"0"
+		 "AbilityDamage"				"0"
+		 
+		 "OnSpellStart"
+		 {
+
+		 }
+		 
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			
+		}
+	}
+	
+}

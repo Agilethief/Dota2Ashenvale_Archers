@@ -1,0 +1,1491 @@
+"DOTAAbilities"
+{
+
+	//=================================================================================================================
+	// Custom Bow Template		Fast shot
+	//=================================================================================================================
+	"item_bow_fast"
+	{
+		"ID"							"10007"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"BaseClass"						"item_datadriven"
+		//"Model"						"models/props_gameplay/salve_blue.vmdl"
+		"AbilityTextureName"			"item_sparrowhawk_bow"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BUILDING"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		"OverrideAnimation"				"ACT_DOTA_ATTACK"
+		
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"3000"
+		"AbilityCastPoint"				"0.45" 
+		"AbilityDamage"					"150"
+		"AbilityManaCost"				"5"
+		"AbilityCooldown"				"0.75"
+		"AbilitySharedCooldown"			"bow"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		
+		"ItemCost"						"250"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemDisassembleRule"			"0"
+		"ItemAlertable"					"0"
+		"ItemAliases"					"bow;template"
+		//"SideShop"						"1"
+		//"HomeShop"						"1"
+
+		"OnSpellStart"
+		{
+			"LinearProjectile"
+			{							 
+				"EffectName"			"particles/basicfastarrow.vpcf"
+				"MoveSpeed"				"%speed"
+				"StartPosition"			"attach_attack1"
+				"StartRadius"			"%arrow_width"
+				"EndRadius"				"%arrow_width"
+				"FixedDistance"			"%arrow_range"
+				"TargetTeams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING"
+				"TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone"		"0"
+				"ProvidesVision"		"1"
+				"VisionRadius"			"300"
+			}
+			"FireSound"
+			{
+				"EffectName"			"Hero_Omniknight.GuardianAngel.Cast"
+			}
+		}
+		
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit"				"1"
+			
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Impact"
+				"Target"				"TARGET"
+			}
+			
+			"Damage"
+			{
+						"Target"				"TARGET"
+						"Type"					"DAMAGE_TYPE_PHYSICAL"
+						"Damage"				"%AbilityDamage"
+			}
+			
+			"Knockback"
+			{
+				"Target"				"TARGET"
+				"Center"	"CASTER"
+				"Duration"	"0.15"
+				"Distance"	"65"
+				"Height"	"55"
+			}
+
+		}
+		
+			"OnProjectileHitBuilding"
+		{
+			"DeleteOnHit"				"1"
+			
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Impact"
+				"Target"				"TARGET"
+			}
+			
+			"Damage"
+			{
+						"Target"				"TARGET"
+						"Type"					"DAMAGE_TYPE_PHYSICAL"
+						"Damage"				"%AbilityDamage"
+			}
+
+		}
+
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"speed"				"1000.0"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_width"		"100"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_range"		"4000"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"spell_cooldown"			"1.5"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Crystal Bow 		Heavy Shot
+	//=================================================================================================================
+	"item_bow_heavy"
+	{
+		"ID"							"10008"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"BaseClass"						"item_datadriven"
+		//"Model"						"models/props_gameplay/salve_blue.vmdl"
+		"AbilityTextureName"			"item_bow_of_the_crystal_caves"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		"OverrideAnimation"				"ACT_DOTA_ATTACK"
+		
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"3000"
+		"AbilityCastPoint"				"1.25" 
+		"AbilityDamage"					"500"
+		"AbilityManaCost"				"10"
+		"AbilityCooldown"				"1.5"
+		"AbilitySharedCooldown"			"bow"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		
+		"ItemCost"						"300"
+		"ItemShopTags"					"move_speed;boost_mana;mana_pool"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemDisassembleRule"			"0"
+		"ItemAlertable"					"0"
+		"ItemAliases"					"bow;template"
+		//"SideShop"						"1"
+		//"HomeShop"						"1"
+		
+		"OnSpellStart"
+		{
+			"LinearProjectile"
+			{							
+				"EffectName"			"particles/basicfirearrow.vpcf" //"particles/econ/items/windrunner/windrunner_weapon_sparrowhawk/windrunner_spell_powershot_sparrowhawk.vpcf"
+				"MoveSpeed"				"%speed"
+				"StartPosition"			"attach_attack1"
+				"StartRadius"			"%arrow_width"
+				"EndRadius"				"%arrow_width"
+				"FixedDistance"			"%arrow_range"
+				"TargetTeams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone"		"0"
+				"ProvidesVision"		"1"
+				"VisionRadius"			"300"
+			}
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Attack"
+			}
+		}
+		
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit"				"1"
+			
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Impact"
+				"Target"				"TARGET"
+			}
+			
+			"Damage"
+			{
+						"Target"				"TARGET"
+						"Type"					"DAMAGE_TYPE_PHYSICAL"
+						"Damage"				"%AbilityDamage"
+			}
+			
+			"Knockback"
+			{
+				"Target"				"TARGET"
+				"Center"	"CASTER"
+				"Duration"	"0.3"
+				"Distance"	"600"
+				"Height"	"60"
+			}
+
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"speed"				"800.0"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_width"		"100"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_range"		"4000"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"spell_cooldown"			"1.5"
+			}
+		}
+	}
+
+
+	//=================================================================================================================
+	// Frost Bow		Frost Shot
+	//=================================================================================================================
+	"item_bow_frost"
+	{
+		"ID"							"10009"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"BaseClass"						"item_datadriven"
+		//"Model"						"models/props_gameplay/salve_blue.vmdl"
+		"AbilityTextureName"			"item_bow_frost"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		"OverrideAnimation"				"ACT_DOTA_ATTACK"
+		
+		"precache"
+		{								 
+			"particle_folder"			"particles/units/heroes/hero_drow"
+		}
+		
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"2000"
+		"AbilityCastPoint"				".55" 
+		"AbilityDamage"					"100"
+		"AbilityManaCost"				"20"
+		"AbilityCooldown"				"1.5"
+		"AbilitySharedCooldown"			"bow"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		
+		"ItemCost"						"255"
+		"ItemShopTags"					"move_speed;boost_mana;mana_pool"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemDisassembleRule"			"0"
+		"ItemAlertable"					"0"
+		"ItemAliases"					"bow;template"
+		//"SideShop"						"1"
+		//"HomeShop"						"1"
+		
+		"OnSpellStart"
+		{
+			"LinearProjectile"
+			{							 
+				"EffectName"			"particles/basicicearrow.vpcf" //"particles/units/heroes/hero_drow/drow_frost_arrow.vpcf" 
+				"MoveSpeed"				"%speed"
+				"StartPosition"			"attach_attack1"
+				"StartRadius"			"%arrow_width"
+				"EndRadius"				"%arrow_width"
+				"FixedDistance"			"%arrow_range"
+				"TargetTeams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone"		"0"
+				"ProvidesVision"		"1"
+				"VisionRadius"			"300"
+			}
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Attack"
+			}
+		}
+		
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit"				"1"
+			
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Impact"
+				"Target"				"TARGET"
+			}
+			
+			"Damage"
+			{
+						"Target"				"TARGET"
+						"Type"					"DAMAGE_TYPE_PHYSICAL"
+						"Damage"				"%AbilityDamage"
+			}
+			
+			"ApplyModifier"
+			{
+				"ModifierName"	"frostbow_slow"
+				"Target"	"TARGET"
+			}
+			
+			"Knockback"
+			{
+				"Target"				"TARGET"
+				"Center"	"CASTER"
+				"Duration"	"0.15"
+				"Distance"	"55"
+				"Height"	"55"
+			}
+			
+		}
+		
+		"Modifiers"
+		{
+			"frostbow_slow"
+			{
+				"Duration"	"%slow_duration"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%move_slow"
+				}
+				
+				"StatusEffectName" "status_effect_frost_lich"
+				"StatusEffectPriority" "9"
+				"EffectName" "particles/units/heroes/hero_lich/lich_slowed_cold.vpcf"
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"speed"				"1100.0"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_width"		"100"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_range"		"4000"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"spell_cooldown"			"1.5"
+			}
+			"05"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"slow_duration"			"5.0"
+			}
+			"06"
+			{
+				"var_type"			"FIELD_INTTEGER"
+				"move_slow"			"-60"
+			}
+		}
+	}
+	
+	
+
+	//=================================================================================================================
+	// Flame Bow		Flame Shot
+	//=================================================================================================================
+	"item_bow_flame"
+	{
+		"ID"							"10010"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"BaseClass"						"item_datadriven"
+		//"Model"						"models/props_gameplay/salve_blue.vmdl"
+		"AbilityTextureName"			"item_bow_flame"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		"OverrideAnimation"				"ACT_DOTA_ATTACK"
+		
+		"precache"
+		{								 
+			"particle_folder"			"particles/units/heroes/hero_clinkz"
+		}
+		
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"3000"
+		"AbilityCastPoint"				".55" 
+		"AbilityDamage"					"100"
+		"AbilityManaCost"				"20"
+		"AbilityCooldown"				"2"
+		"AbilitySharedCooldown"			"bow"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		
+		"ItemCost"						"325"
+		"ItemShopTags"					"move_speed;boost_mana;mana_pool"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemDisassembleRule"			"0"
+		"ItemAlertable"					"0"
+		"ItemAliases"					"bow;template"
+		//"SideShop"						"1"
+		//"HomeShop"						"1"
+		
+		"OnSpellStart"
+		{
+			"LinearProjectile"
+			{							 
+				"EffectName"			"particles/basicfirearrow.vpcf" //"particles/units/heroes/hero_clinkz/clinkz_searing_arrow.vpcf" //"particles/econ/items/windrunner/windrunner_weapon_sparrowhawk/windrunner_spell_powershot_sparrowhawk.vpcf"
+				"MoveSpeed"				"%speed"
+				"StartPosition"			"attach_attack1"
+				"StartRadius"			"%arrow_width"
+				"EndRadius"				"%arrow_width"
+				"FixedDistance"			"%arrow_range"
+				"TargetTeams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone"		"0"
+				"ProvidesVision"		"1"
+				"VisionRadius"			"300"
+			}
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Attack"
+			}
+		}
+		
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit"				"1"
+			
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Impact"
+				"Target"				"TARGET"
+			}
+			
+			"Damage"
+			{
+						"Target"				"TARGET"
+						"Type"					"DAMAGE_TYPE_PHYSICAL"
+						"Damage"				"%AbilityDamage"
+			}
+			
+			"Knockback"
+			{
+				"Target"				"TARGET"
+				"Center"	"CASTER"
+				"Duration"	"0.2"
+				"Distance"	"80"
+				"Height"	"55"
+			}
+			
+			"ApplyModifier"
+			{
+				"ModifierName"	"flamebow_burn"
+				"Target"	"TARGET"
+			}
+			
+		}
+		
+		"Modifiers"
+		{
+			"flamebow_burn"
+			{
+				"Duration"	"%duration"
+				"ThinkInterval"			".5"
+				"OnIntervalThink"
+				{
+					"Damage"
+					{
+						"Target"		"TARGET"
+						"Type"			"DAMAGE_TYPE_MAGICAL"
+						"Damage"		"%damage_tick"
+					}
+				}
+				
+				"StatusEffectName" "status_effect_frost_lich"
+				"StatusEffectPriority" "9"
+				"EffectName" "particles/units/heroes/hero_lich/lich_slowed_cold.vpcf"
+			}
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"speed"				"1100.0"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_width"		"100"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_range"		"4000"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"spell_cooldown"	"1.5"
+			}
+			"05"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"5.0"
+			}
+			"06"
+			{
+				"var_type"			"FIELD_INTTEGER"
+				"damage_tick"		"21"
+			}
+		}
+	}
+	
+
+	//=================================================================================================================
+	// Watcher Bow			Watchshot
+	//=================================================================================================================
+	"item_bow_watcher"
+	{
+		"ID"							"10011"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"BaseClass"						"item_datadriven"
+		//"Model"						"models/props_gameplay/salve_blue.vmdl"
+		"AbilityTextureName"			"item_bow_watcher"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		"OverrideAnimation"				"ACT_DOTA_ATTACK"
+		
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"2000"
+		"AbilityCastPoint"				".55" 
+		"AbilityDamage"					"50"
+		"AbilityManaCost"				"25"
+		"AbilityCooldown"				"1"
+		"AbilitySharedCooldown"			"bow"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		
+		"ItemCost"						"50"
+		"ItemShopTags"					"move_speed;boost_mana;mana_pool"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemDisassembleRule"			"0"
+		"ItemAlertable"					"0"
+		"ItemAliases"					"bow;template"
+		//"SideShop"						"1"
+		//"HomeShop"						"1"
+		
+		"OnSpellStart"
+		{
+			"LinearProjectile"
+			{							 
+				"EffectName"			"particles/basicwatcherarrow.vpcf" //"particles/econ/items/windrunner/windrunner_weapon_sparrowhawk/windrunner_spell_powershot_sparrowhawk.vpcf"
+				"MoveSpeed"				"%speed"
+				"StartPosition"			"attach_attack1"
+				"StartRadius"			"%arrow_width"
+				"EndRadius"				"%arrow_width"
+				"FixedDistance"			"%arrow_range"
+				"TargetTeams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone"		"0"
+				"ProvidesVision"		"1"
+				"VisionRadius"			"1250"
+			}
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Attack"
+			}
+		}
+		
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit"				"1"
+			
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Impact"
+				"Target"				"TARGET"
+			}
+			
+			"Damage"
+			{
+						"Target"				"TARGET"
+						"Type"					"DAMAGE_TYPE_PHYSICAL"
+						"Damage"				"%AbilityDamage"
+			}
+
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"speed"				"1100.0"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_width"		"100"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_range"		"5000"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"spell_cooldown"			"1.5"
+			}
+		}
+	}
+	
+
+	//=================================================================================================================
+	// Longshot Bow		Long Shot
+	//=================================================================================================================
+	"item_bow_longshot"
+	{
+		"ID"							"10012"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"BaseClass"						"item_datadriven"
+		//"Model"						"models/props_gameplay/salve_blue.vmdl"
+		"AbilityTextureName"			"item_bow_longshot"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		"OverrideAnimation"				"ACT_DOTA_ATTACK"
+		
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"2000"
+		"AbilityCastPoint"				".55" 
+		"AbilityDamage"					"50"
+		"AbilityManaCost"				"20"
+		"AbilityCooldown"				"1"
+		"AbilitySharedCooldown"			"bow"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		
+		"ItemCost"						"225"
+		"ItemShopTags"					"move_speed;boost_mana;mana_pool"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemDisassembleRule"			"0"
+		"ItemAlertable"					"0"
+		"ItemAliases"					"bow;template"
+		//"SideShop"						"1"
+		//"HomeShop"						"1"
+		
+		"OnSpellStart"
+		{
+			"LinearProjectile"
+			{							 
+				"EffectName"			"particles/basiclongarrow.vpcf" //"particles/econ/items/windrunner/windrunner_weapon_sparrowhawk/windrunner_spell_powershot_sparrowhawk.vpcf"
+				"MoveSpeed"				"%speed"
+				"StartPosition"			"attach_attack1"
+				"StartRadius"			"%arrow_width"
+				"EndRadius"				"%arrow_width"
+				"FixedDistance"			"%arrow_range"
+				"TargetTeams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone"		"0"
+				"ProvidesVision"		"1"
+				"VisionRadius"			"300"
+			}
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Attack"
+			}
+		}
+		
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit"				"1"
+			
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Impact"
+				"Target"				"TARGET"
+			}
+			
+			"Damage"
+			{
+						"Target"				"TARGET"
+						"Type"					"DAMAGE_TYPE_PHYSICAL"
+						"Damage"				"%AbilityDamage"
+			}
+			
+			"Knockback"
+			{
+				"Target"				"TARGET"
+				"Center"	"CASTER"
+				"Duration"	"0.15"
+				"Distance"	"65"
+				"Height"	"55"
+			}
+
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"speed"				"1100.0"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_width"		"100"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_range"		"10000"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"spell_cooldown"			"1.5"
+			}
+		}
+	}
+	
+
+	//=================================================================================================================
+	// Fell Shot	
+	//=================================================================================================================
+	"item_bow_fell"
+	{
+		"ID"							"20013"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"BaseClass"						"item_datadriven"
+		//"Model"						"models/props_gameplay/salve_blue.vmdl"
+		"AbilityTextureName"			"item_bow_fell"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		"OverrideAnimation"				"ACT_DOTA_ATTACK"
+		
+		"precache"
+		{								 
+			"particle_folder"			"particles/units/heroes/hero_shredder"
+		}
+		
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"2000"
+		"AbilityCastPoint"				".55" 
+		"AbilityDamage"					"50"
+		"AbilityManaCost"				"20"
+		"AbilityCooldown"				"2.5"
+		"AbilitySharedCooldown"			"bow"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		
+		"ItemCost"						"300"
+		"ItemShopTags"					"move_speed;boost_mana;mana_pool"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemDisassembleRule"			"0"
+		"ItemAlertable"					"0"
+		"ItemAliases"					"bow;template"
+		//"SideShop"						"1"
+		//"HomeShop"						"1"
+		
+		"OnSpellStart"
+		{
+			"LinearProjectile"
+			{							 
+				"EffectName"			"particles/basicfellarrow.vpcf" //"particles/units/heroes/hero_shredder/shredder_ambient_saw.vpcf" //"particles/econ/items/windrunner/windrunner_weapon_sparrowhawk/windrunner_spell_powershot_sparrowhawk.vpcf"
+				"MoveSpeed"				"%speed"
+				"StartPosition"			"attach_attack1"
+				"StartRadius"			"%arrow_width"
+				"EndRadius"				"%arrow_width"
+				"FixedDistance"			"%arrow_range"
+				"TargetTeams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_TREE"
+				"TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone"		"0"
+				"ProvidesVision"		"1"
+				"VisionRadius"			"300"
+				"DestroyTrees"			"1"
+			}
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Attack"
+			}
+		}
+		"OnProjectileHit"
+		{
+			"DestroyTrees"
+			{
+				"Target"			"POINT"
+				"Radius"			"100"
+			}
+		}
+		
+		"OnProjectileTree"
+		{
+			"DestroyTrees"
+			{
+				"Target"			"TARGET"
+				"Radius"			"100"
+			}
+		}
+		
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit"				"1"
+			
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Impact"
+				"Target"				"TARGET"
+			}
+			
+			"Damage"
+			{
+						"Target"				"TARGET"
+						"Type"					"DAMAGE_TYPE_PHYSICAL"
+						"Damage"				"%AbilityDamage"
+			}
+			
+			"Knockback"
+			{
+				"Target"				"TARGET"
+				"Center"	"CASTER"
+				"Duration"	"0.3"
+				"Distance"	"-500"
+				"Height"	"55"
+			}
+
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"speed"				"1100.0"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_width"		"100"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_range"		"4000"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"spell_cooldown"			"1.5"
+			}
+		}
+	}
+	
+	
+	//=================================================================================================================
+	// Pepper Shot	
+	//=================================================================================================================
+	"item_bow_peppershot"
+	{
+		"ID"							"20016"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"BaseClass"						"item_datadriven"
+		//"Model"						"models/props_gameplay/salve_blue.vmdl"
+		"AbilityTextureName"			"item_bow_pepper"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		"OverrideAnimation"				"ACT_DOTA_ATTACK"
+		
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"2000"
+		"AbilityCastPoint"				".55" 
+		"AbilityDamage"					"50"
+		"AbilityManaCost"				"20"
+		"AbilityCooldown"				"1"
+		"AbilitySharedCooldown"			"bow"
+		"AOERadius" "450"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		
+		"ItemCost"						"100"
+		"ItemShopTags"					"move_speed;boost_mana;mana_pool"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemDisassembleRule"			"0"
+		"ItemAlertable"					"0"
+		"ItemAliases"					"bow;template"
+		//"SideShop"						"1"
+		//"HomeShop"						"1"
+		
+		"OnSpellStart"
+		{
+			
+		}
+		
+		
+		"Modifiers"
+		{
+			"pepper_rain"
+			{
+				"Aura"				"pepper_damage_aura"
+				"Aura_Radius"		"%radius"
+				"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_BOTH"
+				"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL"
+				"Duration"				"%duration"
+
+			}
+			
+			"pepper_damage_aura"
+			{
+				"ThinkInterval"		"%tick_rate"
+				"OnIntervalThink"
+				{
+					"Damage"
+					{
+						"Type"		"DAMAGE_TYPE_PHYSICAL"
+						"Damage"	"%AbilityDamage"
+						"Target"	"TARGET"
+					}
+				}
+
+			}
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"speed"				"1100.0"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_width"		"100"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_range"		"4000"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"radius"			"500"
+			}
+			"05"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"10.0"
+			}
+			"06"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"tick_rate"			"1.0"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Explosive Shot	
+	//=================================================================================================================
+	"item_bow_explosive"
+	{
+		"ID"							"20015"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"BaseClass"						"item_datadriven"
+		//"Model"						"models/props_gameplay/salve_blue.vmdl"
+		"AbilityTextureName"			"item_bow_explosive"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		"OverrideAnimation"				"ACT_DOTA_ATTACK"
+		
+		"precache"
+		{								 
+			"particle_folder"			"particles/units/heroes/hero_tinker"
+		}
+		
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"2000"
+		"AbilityCastPoint"				".55" 
+		"AbilityDamage"					"200"
+		"AbilityManaCost"				"20"
+		"AbilityCooldown"				"1"
+		"AbilitySharedCooldown"			"bow"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		
+		"ItemCost"						"100"
+		"ItemShopTags"					"move_speed;boost_mana;mana_pool"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemDisassembleRule"			"0"
+		"ItemAlertable"					"0"
+		"ItemAliases"					"bow;template"
+		//"SideShop"						"1"
+		//"HomeShop"						"1"
+		
+		"OnSpellStart"
+		{
+			"LinearProjectile"
+			{							 
+				"EffectName"			"particles/basicexplosivearrow.vpcf"  //"particles/units/heroes/hero_tinker/tinker_rockets_arrow.vpcf" //"particles/econ/items/windrunner/windrunner_weapon_sparrowhawk/windrunner_spell_powershot_sparrowhawk.vpcf"
+				"MoveSpeed"				"%speed"
+				"StartPosition"			"attach_attack1"
+				"StartRadius"			"%arrow_width"
+				"EndRadius"				"%arrow_width"
+				"FixedDistance"			"%arrow_range"
+				"TargetTeams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone"		"0"
+				"ProvidesVision"		"1"
+				"VisionRadius"			"300"
+			}
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Attack"
+			}
+		}
+		
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit"				"1"
+			
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Impact"	//THIS SHOULD BE AN EXPLOSION
+				"Target"				"TARGET"
+			}
+			
+			"Damage"
+			{
+				"Type"					"DAMAGE_TYPE_PHYSICAL"
+				"Damage"				"%AbilityDamage"
+				"Target"
+				{
+				"Center"	"TARGET"
+				"Radius"	"%explosion_radius"
+				"Teams" "DOTA_UNIT_TARGET_TEAM_BOTH"
+				"Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
+				}
+			}
+
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"speed"				"1100.0"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_width"		"100"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_range"		"4000"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"explosion_radius"			"300"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Piercing Shot	
+	//=================================================================================================================
+	"item_bow_piercing"
+	{
+		"ID"							"20014"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"BaseClass"						"item_datadriven"
+		//"Model"						"models/props_gameplay/salve_blue.vmdl"
+		"AbilityTextureName"			"item_bow_pierce"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		"OverrideAnimation"				"ACT_DOTA_ATTACK"
+		
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"2000"
+		"AbilityCastPoint"				".55" 
+		"AbilityDamage"					"200"
+		"AbilityManaCost"				"50"
+		"AbilityCooldown"				"1"
+		"AbilitySharedCooldown"			"bow"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		
+		"ItemCost"						"100"
+		"ItemShopTags"					"move_speed;boost_mana;mana_pool"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemDisassembleRule"			"0"
+		"ItemAlertable"					"0"
+		"ItemAliases"					"bow;template"
+		//"SideShop"						"1"
+		//"HomeShop"						"1"
+		
+		"OnSpellStart"
+		{
+			"LinearProjectile"
+			{							 
+				"EffectName"			"particles/basicpiercearrow.vpcf" //"particles/econ/items/windrunner/windrunner_weapon_sparrowhawk/windrunner_spell_powershot_sparrowhawk.vpcf"
+				"MoveSpeed"				"%speed"
+				"StartPosition"			"attach_attack1"
+				"StartRadius"			"%arrow_width"
+				"EndRadius"				"%arrow_width"
+				"FixedDistance"			"%arrow_range"
+				"TargetTeams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone"		"0"
+				"ProvidesVision"		"1"
+				"VisionRadius"			"300"
+			}
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Attack"
+			}
+		}
+		
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit"				"0"
+			
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Impact"
+				"Target"				"TARGET"
+			}
+			
+			"Damage"
+			{
+						"Target"				"TARGET"
+						"Type"					"DAMAGE_TYPE_PHYSICAL"
+						"Damage"				"%AbilityDamage"
+			}
+
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"speed"				"850.0"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_width"		"100"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"arrow_range"		"4000"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"spell_cooldown"			"1.5"
+			}
+		}
+	}
+	
+	//Recipes
+	//=================================================================================================================
+	// Recipe: Peppershot bow
+	//=================================================================================================================
+	"item_recipe_bow_peppershot"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"20020"							// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"item_datadriven"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_bow_peppershot"
+		"ItemRequirements"
+		{
+			"01"						"item_bow_fast;item_bow_fast;item_bow_fast"
+		}
+	}
+	
+	//=================================================================================================================
+	// Recipe: Explosive bow
+	//=================================================================================================================
+	"item_recipe_bow_explosive"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"20021"							// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"item_datadriven"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_bow_explosive"
+		"ItemRequirements"
+		{
+			"01"						"item_bow_heavy;item_bow_flame"
+		}
+	}
+	
+	//=================================================================================================================
+	// Recipe: Piercing bow
+	//=================================================================================================================
+	"item_recipe_bow_piercing"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"20022"							// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"item_datadriven"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_bow_piercing"
+		"ItemRequirements"
+		{
+			"01"						"item_bow_heavy;item_bow_heavy;item_bow_heavy"
+		}
+	}
+	
+	//=================================================================================================================
+	// Recipe: Fell bow
+	//=================================================================================================================
+	"item_recipe_bow_fell"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"20023"							// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"item_datadriven"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_bow_fell"
+		"ItemRequirements"
+		{
+			"01"						"item_bow_fast;item_quelling_blade;item_quelling_blade;item_quelling_blade"
+		}
+	}
+	
+	//=================================================================================================================
+	// Recipe: Long bow
+	//=================================================================================================================
+	"item_recipe_bow_longshot"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"20024"							// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"item_datadriven"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_bow_longshot"
+		"ItemRequirements"
+		{
+			"01"						"item_bow_fast;item_bow_heavy;item_bow_heavy"
+		}
+	}
+	
+		
+	//=================================================================================================================
+	// Recipe: Watcher bow
+	//=================================================================================================================
+	"item_recipe_bow_watcher"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"20025"							// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"item_datadriven"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_bow_watcher"
+		"ItemRequirements"
+		{
+			"01"						"item_bow_fast;item_ward_observer"
+		}
+	}
+	
+	//=================================================================================================================
+	//=================================================================================================================
+	// UTILLITY ITEMS
+	//=================================================================================================================
+	//=================================================================================================================
+
+	//=================================================================================================================
+	// Net
+	//=================================================================================================================
+	"item_net"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"20050"		
+		"AbilityName"					"item_net"
+		"BaseClass"						"item_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityTextureName"			"item_net"
+		"Model"							"models/props_gameplay/gold_bag.vmdl"
+		"ItemKillable"					"0"
+		
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"500"
+		"AbilityCastPoint"				"0.1"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"65"
+		"ItemPurchasable"				"1"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"2"
+		"ItemKillable"					"0"
+		
+		"OnSpellStart"
+		{
+			"LinearProjectile"
+			{							 
+				"EffectName"			"particles/units/heroes/hero_meepo/meepo_earthbind.vpcf" //"particles/econ/items/windrunner/windrunner_weapon_sparrowhawk/windrunner_spell_powershot_sparrowhawk.vpcf"
+				"MoveSpeed"				"%speed"
+				"StartPosition"			"attach_attack1"
+				"StartRadius"			"%arrow_width"
+				"EndRadius"				"%arrow_width"
+				"FixedDistance"			"%arrow_range"
+				"TargetTeams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone"		"0"
+				"ProvidesVision"		"1"
+				"VisionRadius"			"300"
+			}
+			"FireSound"
+			{
+				"EffectName"			"Catapult.Attack"
+			}
+		}
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_intellect"		"25"
+			}
+		}
+	}
+	
+}

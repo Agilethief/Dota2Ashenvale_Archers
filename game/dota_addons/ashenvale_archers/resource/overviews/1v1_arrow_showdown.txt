@@ -1,0 +1,8 @@
+1v1_arrow_showdown
+{
+	material materials/overviews/1v1_arrow_showdown.vmat
+	pos_x -8192
+	pos_y 8192
+	scale 16.000
+}
+

@@ -1,9 +1,0 @@
-<root>
-	<styles>
-		<include src="file://{resources}/styles/dotastyles.css" />
-		<include src="file://{resources}/styles/custom_game/custom_ui_screentext.css" />
-	</styles>
-	<Panel hittest="false" class="TextContainer">
-	    <Label hittest="false" id="Text" text="Made by Agilethief" />
-	</Panel>
-</root>

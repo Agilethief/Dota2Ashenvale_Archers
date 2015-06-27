@@ -1,0 +1,8 @@
+"AddonInfo"
+{
+	"TeamCount"		"2"
+	"1v1_arrow_showdown"
+	{
+		"MaxPlayers"		"6"
+	}
+}
